@@ -1,0 +1,20 @@
+[
+    {
+        "title": "Mushroom Risotto"
+        "description": "Creamy risotto with mushrooms and parmesan cheese.",
+        "image": "mushroom-risotto",
+        "servings": 3
+        "ingredients": [
+            "arborio rice",
+            "mushrooms",
+            "parmesan",
+            "vegetable broth"
+        ],
+        "instructions": [
+            "Cook rice slowly with broth, stirring often.",
+            "Add sautéed mushrooms.",
+            "Finish with parmesan."
+        ],
+        "isVegetarian": true
+    }
+]

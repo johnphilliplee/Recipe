@@ -1,0 +1,16 @@
+[
+  {
+    "ingredients": [
+      "arborio rice",
+      "mushrooms",
+      "parmesan",
+      "vegetable broth"
+    ],
+    "instructions": [
+      "Cook rice slowly with broth, stirring often.",
+      "Add sautéed mushrooms.",
+      "Finish with parmesan."
+    ],
+    "isVegetarian": true
+  }
+]

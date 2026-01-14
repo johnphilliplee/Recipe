@@ -1,0 +1,55 @@
+[
+  {
+    "title": "Mushroom Risotto",
+    "description": "Creamy risotto with mushrooms and parmesan cheese.",
+    "image": "mushroom-risotto",
+    "servings": 3,
+    "ingredients": [
+      "arborio rice",
+      "mushrooms",
+      "parmesan",
+      "vegetable broth"
+    ],
+    "instructions": [
+      "Cook rice slowly with broth, stirring often.",
+      "Add sautéed mushrooms.",
+      "Finish with parmesan."
+    ],
+    "isVegetarian": true
+  },
+  {
+    "title": "Beef Stir-Fry",
+    "description": "Quick stir-fried beef with vegetables and soy sauce.",
+    "image": "beef-stir-fry",
+    "servings": 4,
+    "ingredients": [
+      "beef strips",
+      "bell pepper",
+      "broccoli",
+      "soy sauce"
+    ],
+    "instructions": [
+      "Stir-fry beef until browned.",
+      "Add vegetables and soy sauce.",
+      "Cook until tender-crisp."
+    ],
+    "isVegetarian": false
+  },
+  {
+    "title": "Fruit Smoothie",
+    "description": "Refreshing blend of banana, berries, and yogurt.",
+    "image": "fruit-smoothie",
+    "servings": 2,
+    "ingredients": [
+      "banana",
+      "mixed berries",
+      "yogurt",
+      "honey"
+    ],
+    "instructions": [
+      "Blend banana, berries, yogurt, and honey until smooth.",
+      "Serve chilled."
+    ],
+    "isVegetarian": true
+  }
+]
