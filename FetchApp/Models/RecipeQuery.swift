@@ -1,7 +1,9 @@
 struct RecipeQuery {
     var text: String?
-    var isVegetarian: Bool?
+    var dietaryAttributes: Set<DietaryAttribute>?
     var servings: Int?
-    var include: [String]?
-    var exclude: [String]?
+    var include: [String] = []
+    var exclude: [String] = []
 }
+
+extension RecipeQuery: Equatable {}

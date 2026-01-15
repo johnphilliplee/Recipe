@@ -2,6 +2,7 @@ import SwiftUI
 
 struct RecipeListView: View {
     @State private var viewModel = ListContentViewModel(service: LocalRecipeDataService())
+    var query: RecipeQuery?
 
     var body: some View {
         ScrollView {
@@ -19,12 +20,16 @@ struct RecipeListView: View {
                 Text("Error: \(error.localizedDescription)")
             }
         }
-        .refreshable { await loadRecipes() }
-        .task { await loadRecipes() }
+        .refreshable { await loadRecipes(query: query) }
+        .onChange(of: query, initial: true) { _, newQuery in
+            Task {
+                await viewModel.loadRecipes(query: newQuery)
+            }
+        }
     }
 
-    private func loadRecipes() async {
-        await viewModel.loadRecipes()
+    private func loadRecipes(query: RecipeQuery? = nil) async {
+        await viewModel.loadRecipes(query: query)
     }
 }
 

@@ -11,6 +11,6 @@
       "Add sautéed mushrooms.",
       "Finish with parmesan."
     ],
-    "isVegetarian": true
+    "dietaryAttributes": ["vegetarian"]
   }
 ]

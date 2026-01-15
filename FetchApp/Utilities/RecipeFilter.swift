@@ -3,48 +3,50 @@ struct RecipeFilter {
         guard let query else { return recipes }
 
         return recipes.filter { recipe in
-            if let text = query.text {
-                let matchesText =
-                recipe.title.localizedCaseInsensitiveContains(text) ||
-                recipe.description.localizedCaseInsensitiveContains(text) ||
-                recipe.instructions.contains {
-                    $0.localizedCaseInsensitiveContains(text)
-                }
+            matchesText(query.text, in: recipe) &&
+            matchesDietaryAttributes(query.dietaryAttributes, recipe) &&
+            matchesServings(query.servings, recipe) &&
+            includesIngredients(query.include, recipe) &&
+            excludesIngredients(query.exclude, recipe)
+        }
+    }
 
-                if !matchesText {
-                    return false
-                }
-            }
+    // MARK: - Helpers
 
-            // Vegetarian filter
-            if let isVegetarian = query.isVegetarian, recipe.isVegetarian != isVegetarian {
-                return false
-            }
+    private func matchesText(_ text: String?, in recipe: Recipe) -> Bool {
+        guard let text else { return true }
 
-            // Servings filter
-            if let servings = query.servings, recipe.servings != servings {
-                return false
-            }
+        return recipe.title.localizedCaseInsensitiveContains(text)
+        || recipe.description.localizedCaseInsensitiveContains(text)
+        || recipe.instructions.contains { $0.localizedCaseInsensitiveContains(text) }
+    }
 
-            // Include ingredients
-            if let include = query.include, !include.allSatisfy({ ingredient in
-                recipe.ingredients.contains {
-                    $0.localizedCaseInsensitiveContains(ingredient)
-                }
-            }) {
-                return false
-            }
+    private func matchesDietaryAttributes(_ requiredAttributes: Set<DietaryAttribute>?, _ recipe: Recipe) -> Bool {
+        guard let requiredAttributes else { return true }
 
-            // Exclude ingredients
-            if let exclude = query.exclude,
-               exclude.contains(where: { ingredient in
-                   recipe.ingredients.contains {
-                       $0.localizedCaseInsensitiveContains(ingredient)
-                   }}) {
-                return false
-            }
+        // OR logic: true if there's at least one overlap
+        return !recipe.dietaryAttributes.isDisjoint(with: requiredAttributes)
+    }
 
-            return true
+    private func matchesServings(_ servings: Int?, _ recipe: Recipe) -> Bool {
+        guard let servings else { return true }
+
+        return recipe.servings == servings
+    }
+
+    private func includesIngredients(_ include: [String]?, _ recipe: Recipe) -> Bool {
+        guard let include else { return true }
+
+        return include.allSatisfy { ingredient in
+            recipe.ingredients.contains { $0.localizedCaseInsensitiveContains(ingredient) }
+        }
+    }
+
+    private func excludesIngredients(_ exclude: [String]?, _ recipe: Recipe) -> Bool {
+        guard let exclude else { return true }
+
+        return !exclude.contains { ingredient in
+            recipe.ingredients.contains { $0.localizedCaseInsensitiveContains(ingredient) }
         }
     }
 }

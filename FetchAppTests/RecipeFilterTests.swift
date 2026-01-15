@@ -17,7 +17,7 @@ struct RecipeFilterTests {
                 "Prepare tomato sauce",
                 "Mix together and top with cheese"
             ],
-            isVegetarian: true
+            dietaryAttributes: [.vegetarian]
         ),
         Recipe(
             id: UUID(),
@@ -31,7 +31,7 @@ struct RecipeFilterTests {
                 "Add curry paste",
                 "Simmer and serve with rice"
             ],
-            isVegetarian: false
+            dietaryAttributes: []
         ),
         Recipe(
             id: UUID(),
@@ -45,7 +45,32 @@ struct RecipeFilterTests {
                 "Toss together in a bowl",
                 "Serve chilled"
             ],
-            isVegetarian: true
+            dietaryAttributes: [.vegetarian]
+        ),
+        Recipe(
+            id: UUID(),
+            title: "Vegan Buddha Bowl",
+            description: "A nourishing bowl with quinoa, roasted chickpeas, and fresh vegetables.",
+            image: "vegan-buddha-bowl",
+            servings: 2,
+            ingredients: [
+                "quinoa",
+                "chickpeas",
+                "spinach",
+                "carrot",
+                "cucumber",
+                "avocado",
+                "olive oil",
+                "lemon juice"
+            ],
+            instructions: [
+                "Cook quinoa according to package instructions.",
+                "Roast chickpeas with olive oil until crispy.",
+                "Prepare fresh vegetables by chopping carrot, cucumber, and avocado.",
+                "Assemble bowl with quinoa, chickpeas, and vegetables.",
+                "Drizzle with lemon juice and serve."
+            ],
+            dietaryAttributes: [.vegan, .glutenFree]
         )
     ]
 
@@ -81,13 +106,53 @@ struct RecipeFilterTests {
     func filterByVegetarian() async throws {
         // Arrange
         let filter = RecipeFilter()
-        let query = RecipeQuery(isVegetarian: true)
+        let query = RecipeQuery(dietaryAttributes: [.vegetarian])
 
         // Act
         let result = filter.apply(query, to: recipes)
 
         // Assert
         #expect(result.count == 2)
+    }
+
+    @Test
+    func filterByVegan() async throws {
+        let filter = RecipeFilter()
+        let query = RecipeQuery(dietaryAttributes: [.vegan])
+
+        let result = filter.apply(query, to: recipes)
+
+        #expect(result.count == 1)
+    }
+
+    @Test
+    func filterByGlutenFree() async throws {
+        let filter = RecipeFilter()
+        let query = RecipeQuery(dietaryAttributes: [.glutenFree])
+
+        let result = filter.apply(query, to: recipes)
+
+        #expect(result.count == 1)
+    }
+
+    @Test
+    func filterByVeganAndGlutenFree() async throws {
+        let filter = RecipeFilter()
+        let query = RecipeQuery(dietaryAttributes: [.vegan, .glutenFree])
+
+        let result = filter.apply(query, to: recipes)
+
+        #expect(result.count == 1)
+    }
+
+    @Test
+    func filterByNoAttributesShouldReturnAll() async throws {
+        let filter = RecipeFilter()
+        let query = RecipeQuery(dietaryAttributes: nil)
+
+        let result = filter.apply(query, to: recipes)
+
+        #expect(result.count == recipes.count)
     }
 
     @Test
@@ -114,7 +179,7 @@ struct RecipeFilterTests {
         let result = filter.apply(query, to: recipes)
 
         // Assert
-        #expect(result.count == 2) // Pasta + Salad
+        #expect(result.count == 2)
     }
 
     @Test
@@ -126,14 +191,14 @@ struct RecipeFilterTests {
         // Act
         let result = filter.apply(query, to: recipes)
 
-        #expect(result.count == 2) // Pasta + Salad
+        #expect(result.count == 3)
     }
 
     @Test
     func filterCombined() async throws {
         // Arrange
         let filter = RecipeFilter()
-        let query = RecipeQuery(isVegetarian: true, servings: 2, include: ["tomato"])
+        let query = RecipeQuery(dietaryAttributes: [.vegetarian], servings: 2, include: ["tomato"])
 
         // Act
         let result = filter.apply(query, to: recipes)
@@ -153,7 +218,7 @@ struct RecipeFilterTests {
         let result = filter.apply(query, to: recipes)
 
         // Assert
-        #expect(result.count == 3)
+        #expect(result.count == 4)
     }
 
 }

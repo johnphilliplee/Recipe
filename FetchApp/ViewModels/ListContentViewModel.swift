@@ -18,11 +18,11 @@ class ListContentViewModel {
         self.service = service
     }
 
-    func loadRecipes() async {
+    func loadRecipes(query: RecipeQuery?) async {
         do {
             state = .loading
-            let recipes = try await service.fetchRecipes(query: nil)
-            state = .data(recipes)
+            let recipes = try await service.fetchRecipes(query: query)
+            state = recipes.isEmpty ? .empty : .data(recipes)
         } catch {
             state = .error(error)
         }

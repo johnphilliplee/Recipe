@@ -5,27 +5,16 @@ struct RecipeRow: View {
 
     var body: some View {
         HStack(alignment: .top, spacing: 8) {
-            ZStack(alignment: .topTrailing) {
-                RecipeImageView(imageNameOrURL: recipe.image)
-                    .frame(width: 80, height: 80)
-                    .cornerRadius(12)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 12)
-                            .stroke(
-                                Color(.systemGray).opacity(0.5),
-                                lineWidth: 1
-                            )
-                    )
-
-                if recipe.isVegetarian {
-                    Image("leaf")
-                        .resizable()
-                        .frame(width: 24, height: 24)
-                        .cornerRadius(12)
-                        .padding(6)
-                        .scaledToFit()
-                }
-            }
+            RecipeImageView(imageNameOrURL: recipe.image)
+                .frame(width: 80, height: 80)
+                .cornerRadius(12)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 12)
+                        .stroke(
+                            Color(.systemGray).opacity(0.5),
+                            lineWidth: 1
+                        )
+                )
 
             VStack(alignment: .leading) {
                 Text(recipe.title)
@@ -71,22 +60,22 @@ struct RecipeRow: View {
 
 #Preview {
     RecipeRow(recipe:
-        Recipe(
-            title: "Mushroom Risotto",
-            description: "Creamy risotto with mushrooms and parmesan cheese.",
-            image: "mushroom-risotto", servings: 3,
-            ingredients: [
-                "arborio rice",
-                "mushrooms",
-                "parmesan",
-                "vegetable broth"
-            ],
-            instructions: [
-                "Cook rice slowly with broth, stirring often.",
-                "Add sautéed mushrooms.",
-                "Finish with parmesan."
-            ],
-            isVegetarian: true
-        )
+                Recipe(
+                    title: "Mushroom Risotto",
+                    description: "Creamy risotto with mushrooms and parmesan cheese.",
+                    image: "mushroom-risotto", servings: 3,
+                    ingredients: [
+                        "arborio rice",
+                        "mushrooms",
+                        "parmesan",
+                        "vegetable broth"
+                    ],
+                    instructions: [
+                        "Cook rice slowly with broth, stirring often.",
+                        "Add sautéed mushrooms.",
+                        "Finish with parmesan."
+                    ],
+                    dietaryAttributes: [.vegetarian]
+                )
     )
 }

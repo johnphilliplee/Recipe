@@ -6,7 +6,10 @@ struct RecipeListDataView: View {
     var body: some View {
         VStack {
             ForEach(recipes) { recipe in
-                RecipeRow(recipe: recipe)
+                NavigationLink(destination: RecipeDetailView(recipe: recipe)) {
+                    RecipeRow(recipe: recipe)
+                }
+                .buttonStyle(.plain)
             }
             .padding(.vertical, 4)
         }
@@ -33,7 +36,7 @@ struct RecipeListDataView: View {
                 "Add sautéed mushrooms.",
                 "Finish with parmesan."
             ],
-            isVegetarian: true
+            dietaryAttributes: [.vegetarian]
         ),
         Recipe(
             id: UUID(),
@@ -52,7 +55,7 @@ struct RecipeListDataView: View {
                 "Add sautéed mushrooms.",
                 "Finish with parmesan."
             ],
-            isVegetarian: true
+            dietaryAttributes: [.vegetarian]
         )
     ])
 }

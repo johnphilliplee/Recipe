@@ -3,6 +3,7 @@ import SwiftUI
 struct NavigationHeader: View {
     let title: String
     let subtitle: String
+    let onSearchTapped: () -> Void
 
     var body: some View {
         HStack {
@@ -16,13 +17,12 @@ struct NavigationHeader: View {
 
             Spacer()
 
-            Button {
-                // action goes here
-            } label: {
+            Button(action: onSearchTapped) {
                 Image(systemName: "magnifyingglass") .foregroundColor(.white)
                     .padding(8)
             }
-            .background(Color.orange) .clipShape(Circle())
+            .background(Color.orange)
+            .clipShape(Circle())
         }
     }
 }
