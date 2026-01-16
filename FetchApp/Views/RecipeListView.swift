@@ -12,12 +12,25 @@ struct RecipeListView: View {
             case .loading:
                 Text("Loading")
             case .empty:
-                Text("Empty")
+                StateMessageView(
+                    type: .empty,
+                    title: "No recipes found",
+                    message: "Try adjusting your search to get more results",
+                    systemImage: "fork.knife"
+                )
             case .data(let recipes):
                 RecipeListDataView(recipes: recipes)
                     .padding(.horizontal)
-            case .error(let error):
-                Text("Error: \(error.localizedDescription)")
+            case .error:
+                StateMessageView(
+                    type: .error,
+                    title: "Oops!",
+                    message: "An unexpected error occurred",
+                    systemImage: "exclamationmark.triangle",
+                    onRetry: {
+                        Task { await loadRecipes(query: query) }
+                    }
+                )
             }
         }
         .refreshable { await loadRecipes(query: query) }

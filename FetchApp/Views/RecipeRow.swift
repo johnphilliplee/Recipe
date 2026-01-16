@@ -12,7 +12,7 @@ struct RecipeRow: View {
                     RoundedRectangle(cornerRadius: 12)
                         .stroke(
                             Color(.systemGray).opacity(0.5),
-                            lineWidth: 1
+                            lineWidth: 0.5
                         )
                 )
 
@@ -40,15 +40,6 @@ struct RecipeRow: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(Color(.systemBackground))
         .clipShape(RoundedRectangle(cornerRadius: 12))
-        .overlay(
-            RoundedRectangle(
-                cornerRadius: 12
-            )
-            .stroke(
-                Color(.systemGray).opacity(0.5),
-                lineWidth: 1
-            )
-        )
         .shadow(
             color: Color(.systemGray).opacity(0.2),
             radius: 4,

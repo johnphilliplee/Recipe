@@ -16,8 +16,6 @@ struct HomeView: View {
 
             RecipeListView(query: activeQuery)
                 .background(Color(.systemGray6))
-
-            Spacer()
         }
         .sheet(isPresented: $showSearchSheet) {
             SearchSheetView(onSubmit: {
