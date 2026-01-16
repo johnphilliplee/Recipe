@@ -7,7 +7,6 @@ struct SearchSheetView: View {
     var onSubmit: (RecipeQuery) -> Void
 
     var body: some View {
-
         ScrollView {
             VStack(spacing: 16) {
                 SheetHeaderView(
@@ -67,6 +66,7 @@ struct SearchSheetView: View {
             }
             .padding()
         }
+        .padding(.top, 20)
     }
 }
 

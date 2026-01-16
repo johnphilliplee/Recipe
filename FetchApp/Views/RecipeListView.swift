@@ -1,3 +1,4 @@
+import ActivityIndicatorView
 import SwiftUI
 
 struct RecipeListView: View {
@@ -5,40 +6,46 @@ struct RecipeListView: View {
     var query: RecipeQuery?
 
     var body: some View {
-        ScrollView {
-            switch viewModel.state {
-            case .initial:
-                Text("Initial")
-            case .loading:
-                Text("Loading")
-            case .empty:
-                StateMessageView(
-                    type: .empty,
-                    title: "No recipes found",
-                    message: "Try adjusting your search to get more results",
-                    systemImage: "fork.knife"
-                )
-            case .data(let recipes):
-                RecipeListDataView(recipes: recipes)
-                    .padding(.horizontal)
-            case .error:
-                StateMessageView(
-                    type: .error,
-                    title: "Oops!",
-                    message: "An unexpected error occurred",
-                    systemImage: "exclamationmark.triangle",
-                    onRetry: {
-                        Task { await loadRecipes(query: query) }
+            Group {
+                switch viewModel.state {
+                case .initial, .loading:
+                    ActivityIndicatorView(
+                        isVisible: .constant(true),
+                        type: .opacityDots(count: 3, inset: 2)
+                    )
+                    .frame(width: 100, height: 40)
+                    .foregroundStyle(.orange)
+                case .empty:
+                    StateMessageView(
+                        type: .empty,
+                        title: "No recipes found",
+                        message: "Try adjusting your search to get more results",
+                        systemImage: "fork.knife"
+                    )
+                case .data(let recipes):
+                    ScrollView {
+                        RecipeListDataView(recipes: recipes)
+                            .padding(.horizontal)
                     }
-                )
+                case .error:
+                    StateMessageView(
+                        type: .error,
+                        title: "Oops!",
+                        message: "An unexpected error occurred",
+                        systemImage: "exclamationmark.triangle",
+                        onRetry: {
+                            Task { await loadRecipes(query: query) }
+                        }
+                    )
+                }
             }
-        }
-        .refreshable { await loadRecipes(query: query) }
-        .onChange(of: query, initial: true) { _, newQuery in
-            Task {
-                await viewModel.loadRecipes(query: newQuery)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color(.systemGray6))
+            .onChange(of: query, initial: true) { _, newQuery in
+                Task {
+                    await viewModel.loadRecipes(query: newQuery)
+                }
             }
-        }
     }
 
     private func loadRecipes(query: RecipeQuery? = nil) async {

@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		D9E52DBE2F19E5BF004399D7 /* ActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = D9E52DBD2F19E5BF004399D7 /* ActivityIndicatorView */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		D935840C2F17368700C75BFD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -63,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9E52DBE2F19E5BF004399D7 /* ActivityIndicatorView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,6 +119,7 @@
 			);
 			name = FetchApp;
 			packageProductDependencies = (
+				D9E52DBD2F19E5BF004399D7 /* ActivityIndicatorView */,
 			);
 			productName = FetchApp;
 			productReference = D93583E32F1728D300C75BFD /* FetchApp.app */;
@@ -171,6 +177,9 @@
 			);
 			mainGroup = D93583DA2F1728D300C75BFD;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				D9E52DBC2F19E5BF004399D7 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D93583E42F1728D300C75BFD /* Products */;
 			projectDirPath = "";
@@ -504,6 +513,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D9E52DBC2F19E5BF004399D7 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/ActivityIndicatorView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D9E52DBD2F19E5BF004399D7 /* ActivityIndicatorView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D9E52DBC2F19E5BF004399D7 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */;
+			productName = ActivityIndicatorView;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D93583DB2F1728D300C75BFD /* Project object */;
 }

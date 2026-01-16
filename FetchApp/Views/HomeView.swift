@@ -8,14 +8,13 @@ struct HomeView: View {
         NavigationStack {
             NavigationHeader(
                 title: "Recipe",
-                subtitle: "Trending",
+                subtitle: "Find your next meal idea",
                 onSearchTapped: { showSearchSheet = true }
             )
             .padding(.vertical, 12)
             .padding(.horizontal)
 
             RecipeListView(query: activeQuery)
-                .background(Color(.systemGray6))
         }
         .sheet(isPresented: $showSearchSheet) {
             SearchSheetView(onSubmit: {

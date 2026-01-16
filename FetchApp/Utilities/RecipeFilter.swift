@@ -24,8 +24,8 @@ struct RecipeFilter {
     private func matchesDietaryAttributes(_ requiredAttributes: Set<DietaryAttribute>?, _ recipe: Recipe) -> Bool {
         guard let requiredAttributes else { return true }
 
-        // OR logic: true if there's at least one overlap
-        return !recipe.dietaryAttributes.isDisjoint(with: requiredAttributes)
+        // AND logic: true only if recipe contains all required attributes
+        return requiredAttributes.isSubset(of: recipe.dietaryAttributes)
     }
 
     private func matchesServings(_ servings: Int?, _ recipe: Recipe) -> Bool {

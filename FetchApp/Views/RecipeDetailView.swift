@@ -46,7 +46,7 @@ struct RecipeDetailView: View {
                             Image(systemName: "fork.knife")
                                 .font(.caption)
                                 .foregroundStyle(.orange)
-                            Text(ingredient)
+                            Text(ingredient.capitalized)
                         }
                     }
                 }

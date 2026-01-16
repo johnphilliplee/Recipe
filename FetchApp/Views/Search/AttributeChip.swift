@@ -6,7 +6,7 @@ struct AttributeChip: View {
     let onTap: () -> Void
 
     var body: some View {
-        Text(attribute.rawValue.capitalized)
+        Text(attribute.displayName)
             .font(.subheadline)
             .padding(.vertical, 8)
             .padding(.horizontal, 12)
