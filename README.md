@@ -6,7 +6,7 @@
 
 The project is named FetchApp, but it is a Recipe app. I was aiming to build the fetch at the start and build the UI in another (what would be the actual Recipe app), but what happened is after building the fetch mechanism, I just continued working on this same project.
 
-In general, the LocalRecipeDataService simulates what a backend endpoint would do. Our north star is that we would convert the `RecipeQuery` object into something that the BE can use (query parameters, body, etc) and we would get a filtered list of recipe in return.
+In general, the LocalRecipeDataService simulates what a backend endpoint would do. Our north star is that we would convert the `RecipeQuery` object into something that the BE can use (query parameters, body, etc) that we can include in the request, then we would get a filtered list of recipe in return.
 
 Should look okay in both light and dark modes.
 
