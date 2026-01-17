@@ -10,6 +10,12 @@ In general, the LocalRecipeDataService simulates what a backend endpoint would d
 
 Should look okay in both light and dark modes.
 
+### Usage
+
+After running the app, it should automatically fetch the data from a local json file. From the app's main interface, tapping the magnifying glass icon from the upper right corner should bring up the search filter view where you can specify search parameters. To reset the data, search without setting any parameters. The search uses AND logic.
+
+All data is local, if using a real backend endpoint, the search should hit that endpoint. 
+
 ### Prerequisites
 Note: The code was written in Xcode 16.2, but tested in iPhone simulators running iOS 26.
 
