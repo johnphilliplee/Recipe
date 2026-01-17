@@ -10,6 +10,20 @@ In general, the LocalRecipeDataService simulates what a backend endpoint would d
 
 Should look okay in both light and dark modes.
 
+### Screenshots
+
+| Screen                  | Screenshot                          |
+|--------------------------|-------------------------------------|
+| Launch                   | ![Launch](./Screenshots/Launch.png) |
+| Loading                  | ![Loading](./Screenshots/Loading.png) |
+| Home                     | ![Home](./Screenshots/Home.png) |
+| Search (no parameters)   | ![Search1](./Screenshots/Search1.png) |
+| Search                   | ![Search2](./Screenshots/Search2.png) |
+| Empty                    | ![Empty](./Screenshots/Empty.png) |
+| Error                    | ![Error](./Screenshots/Error.png) |
+
+
+
 ### Usage
 
 After running the app, it should automatically fetch the data from a local json file. From the app's main interface, tapping the magnifying glass icon from the upper right corner should bring up the search filter view where you can specify search parameters. To reset the data, search without setting any parameters. The search uses AND logic.
@@ -195,7 +209,7 @@ func fetchRecipes(query: RecipeQuery?) async throws -> [Recipe]
 **Improvement**: `RecipeImageView` supports remote URLs for future hybrid approach (see note in Bundle Resources)
 
 #### 2. **Filtering Strategy**
-In-memory filtering on client side to simulate a server
+In-memory filtering on client side to simulate a server doing thay job
 
 #### 3. **Testing Strategy**
 **Current**: Unit tests for critical paths (data loading, filtering) have been added, but not for everything. UI tests haven't been added yet as well.
